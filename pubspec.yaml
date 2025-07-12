@@ -13,11 +13,9 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.0
+  dynamic_color: ^1.7.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   flutter_lints: ^5.0.0
 
 flutter:
