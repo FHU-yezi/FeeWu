@@ -1,4 +1,5 @@
 .dart_tool
+.gradle
 build
 linux/flutter/ephemeral
 
