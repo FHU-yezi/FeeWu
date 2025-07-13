@@ -33,6 +33,7 @@ class ThingsPageState extends State<ThingsPage> {
               final newThing = await showModalBottomSheet<thingModel.Thing>(
                 context: context,
                 builder: (context) => const AddThing(),
+                isScrollControlled: true,
               );
 
               if (newThing != null) {
