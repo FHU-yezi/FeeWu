@@ -11,7 +11,7 @@ class AddThingDialog extends StatefulWidget {
 class AddThingDialogState extends State<AddThingDialog> {
   String name = "";
   double price = 0;
-  int usedDays = 0;
+  DateTime buyDate = DateTime.now().subtract(Duration(days: 1));
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class AddThingDialogState extends State<AddThingDialog> {
         spacing: 16,
         children: [
           TextField(
-            decoration: InputDecoration(labelText: "物品名"),
+            decoration: InputDecoration(labelText: "名称"),
             onChanged: (value) {
               setState(() {
                 name = value;
@@ -40,19 +40,35 @@ class AddThingDialogState extends State<AddThingDialog> {
               }
             },
           ),
-          TextField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: "使用天数"),
-            onChanged: (value) {
-              var newValue = int.tryParse(value);
-              if (newValue != null) {
-                setState(() {
-                  usedDays = newValue;
-                });
-              }
-            },
+          Row(
+            children: [
+              Text("购买日期：${buyDate.toIso8601String().split("T")[0]}"),
+              TextButton(
+                child: Text("修改"),
+                onPressed: () async {
+                  var newValue = await showDatePicker(
+                    context: context,
+                    initialEntryMode: DatePickerEntryMode.calendarOnly,
+                    firstDate: DateTime(1970, 1, 1),
+                    lastDate: DateTime.now().subtract(Duration(days: 1)),
+                    helpText: "购买日期",
+                    cancelText: "取消",
+                    confirmText: "确认",
+                  );
+
+                  if (newValue != null) {
+                    setState(() {
+                      buyDate = newValue;
+                    });
+                  }
+                },
+              ),
+            ],
+            spacing: 4,
           ),
         ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
       ),
       actions: [
         TextButton(
@@ -63,11 +79,11 @@ class AddThingDialogState extends State<AddThingDialog> {
         ),
         FilledButton(
           child: Text("添加"),
-          onPressed: (name != "" && price != 0 && usedDays != 0)
+          onPressed: (name != "" && price != 0)
               ? () {
                   Navigator.pop(
                     context,
-                    thingModel.Thing(name.trim(), price, usedDays),
+                    thingModel.Thing(name.trim(), price, buyDate),
                   );
                 }
               : null,

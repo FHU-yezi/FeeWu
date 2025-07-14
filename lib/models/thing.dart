@@ -1,11 +1,15 @@
 class Thing {
   String name;
   double price;
-  int usedDays;
+  DateTime buyDate;
 
-  Thing(this.name, this.price, this.usedDays);
+  Thing(this.name, this.price, this.buyDate);
 
-  double averagePricePerDay() {
-    return price / usedDays;
+  int getUsedDays() {
+    return (DateTime.now().difference(buyDate)).inDays;
+  }
+
+  double getAveragePricePerDay() {
+    return price / this.getUsedDays();
   }
 }

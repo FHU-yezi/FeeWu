@@ -28,7 +28,7 @@ class Thing extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "${thingData.price.toStringAsFixed(2)} 元 · ${thingData.usedDays} 天",
+                  "${thingData.price.toStringAsFixed(2)} 元 · ${thingData.getUsedDays()} 天",
                   style: TextStyle(color: colorScheme.secondary),
                 ),
               ],
@@ -38,7 +38,7 @@ class Thing extends StatelessWidget {
               children: [
                 Text("每天", style: TextStyle(color: colorScheme.secondary)),
                 Text(
-                  "${thingData.averagePricePerDay().toStringAsFixed(2)} 元",
+                  "${thingData.getAveragePricePerDay().toStringAsFixed(2)} 元",
                   style: TextStyle(
                     color: colorScheme.primary,
                     fontSize: 20,
