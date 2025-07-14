@@ -1,35 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:feewu/models/thing.dart' as thingModel;
 
-class AddThing extends StatefulWidget {
-  const AddThing({super.key});
+class AddThingDialog extends StatefulWidget {
+  const AddThingDialog({super.key});
 
   @override
-  State<StatefulWidget> createState() => AddThingState();
+  State<StatefulWidget> createState() => AddThingDialogState();
 }
 
-class AddThingState extends State<AddThing> {
+class AddThingDialogState extends State<AddThingDialog> {
   String name = "";
   double price = 0;
   int usedDays = 0;
 
   @override
   Widget build(BuildContext context) {
-    var colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
-      padding: EdgeInsets.all(16),
-      child: Column(
+    return AlertDialog(
+      title: Text("添加物品"),
+      content: Column(
+        spacing: 16,
         children: [
-          Text(
-            "添加物品",
-            style: TextStyle(
-              color: colorScheme.primary,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           TextField(
             decoration: InputDecoration(labelText: "物品名"),
             onChanged: (value) {
@@ -62,24 +52,27 @@ class AddThingState extends State<AddThing> {
               }
             },
           ),
-          SizedBox(height: 4),
-          SizedBox(
-            child: FilledButton(
-              child: Text("添加"),
-              onPressed: (name != "" && price != 0 && usedDays != 0)
-                  ? () {
-                      Navigator.pop(
-                        context,
-                        thingModel.Thing(name.trim(), price, usedDays),
-                      );
-                    }
-                  : null,
-            ),
-            width: double.infinity,
-          ),
         ],
-        spacing: 16,
       ),
+      actions: [
+        TextButton(
+          child: Text("取消"),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        FilledButton(
+          child: Text("添加"),
+          onPressed: (name != "" && price != 0 && usedDays != 0)
+              ? () {
+                  Navigator.pop(
+                    context,
+                    thingModel.Thing(name.trim(), price, usedDays),
+                  );
+                }
+              : null,
+        ),
+      ],
     );
   }
 }

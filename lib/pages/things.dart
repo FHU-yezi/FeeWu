@@ -1,4 +1,4 @@
-import 'package:feewu/widgets/add_thing.dart';
+import 'package:feewu/widgets/add_thing_dialog.dart';
 import 'package:feewu/widgets/things_list.dart';
 import 'package:flutter/material.dart';
 import 'package:feewu/models/thing.dart' as thingModel;
@@ -30,10 +30,9 @@ class ThingsPageState extends State<ThingsPage> {
             foregroundColor: colorScheme.onPrimary,
             backgroundColor: colorScheme.primary,
             onPressed: () async {
-              final newThing = await showModalBottomSheet<thingModel.Thing>(
+              final newThing = await showDialog<thingModel.Thing>(
                 context: context,
-                builder: (context) => const AddThing(),
-                isScrollControlled: true,
+                builder: (context) => const AddThingDialog(),
               );
 
               if (newThing != null) {
