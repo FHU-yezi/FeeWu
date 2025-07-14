@@ -3,6 +3,7 @@ import 'package:feewu/pages/analytics.dart';
 import 'package:feewu/pages/settings.dart';
 import 'package:feewu/pages/things.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const App());
@@ -33,6 +34,8 @@ class AppState extends State<App> {
             colorScheme:
                 darkColorScheme ?? ColorScheme.fromSeed(seedColor: Colors.blue),
           ),
+          localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+          supportedLocales: [Locale("en"), Locale("zh")],
           home: Scaffold(
             appBar: AppBar(title: Text("费物")),
             body: [
