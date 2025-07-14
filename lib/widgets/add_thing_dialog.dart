@@ -21,7 +21,10 @@ class AddThingDialogState extends State<AddThingDialog> {
         spacing: 16,
         children: [
           TextField(
-            decoration: InputDecoration(labelText: "名称"),
+            decoration: InputDecoration(
+              labelText: "物品名",
+              border: OutlineInputBorder(),
+            ),
             onChanged: (value) {
               setState(() {
                 name = value;
@@ -30,7 +33,11 @@ class AddThingDialogState extends State<AddThingDialog> {
           ),
           TextField(
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: "价格"),
+            decoration: InputDecoration(
+              labelText: "价格",
+              suffix: Text("元"),
+              border: OutlineInputBorder(),
+            ),
             onChanged: (value) {
               var newValue = double.tryParse(value);
               if (newValue != null) {
